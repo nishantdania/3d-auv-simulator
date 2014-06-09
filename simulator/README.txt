@@ -39,6 +39,7 @@ To load a previously saved scene:
 1. Click on the GUI to make it active.
 2. Press 'Ctrl + L' or go to file menu and choose the 'Load' option.
 3. Search for the file in the dialog box and click the 'Open' button. 
+4. Sample scenes have been saved in the savedFiles folder. The scenes have been created on Ubuntu 13.04 using Panda3d 1.8.1
 
 ******************************
 Additional options:
