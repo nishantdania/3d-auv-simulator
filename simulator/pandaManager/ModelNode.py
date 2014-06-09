@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	May 28, 2014
+modified on:	June 8, 2014
 
 """
 
@@ -15,9 +15,10 @@ from pandac.PandaModules import *
 class ModelNode(DirectObject):
 	def __init__(self,pandaScene):
 		self.pandaScene = pandaScene
+		self.scale = 1
 
-	def getfilename(self):
-		return self.model.filename
+	def getFilename(self):
+		return str(self.filename)
 
 	def getX(self):
 		return self.model.getX()
@@ -38,10 +39,12 @@ class ModelNode(DirectObject):
 		return self.model.getR()
 
 	def getScale(self):
-		return self.model.getScale()
+		return self.scale
 
-	def setfilename(self,filename):
-		self.model.fileName = filename
+	def setFilename(self,filename):
+		self.filename = str(filename)
+		self.pandaFile = Filename.fromOsSpecific(self.filename)
+		self.filename = filename
 
 	def setX(self,x):
 		self.model.setX(x)
@@ -62,12 +65,13 @@ class ModelNode(DirectObject):
 		self.model.setR(r)
 
 	def setScale(self,scale):
-		self.model.setScale(scale)
+		self.scale = scale
+		self.model.setScale(self.scale)
 
 	def addModel(self,modelName):
 		self.modelName = str(modelName)
 		self.pandaFile = Filename.fromOsSpecific(self.modelName)
 		self.model = loader.loadModel(self.pandaFile)
 		self.model.reparentTo(self.pandaScene.getMainNode())
-		self.model.setPos(-8,42,0)
-		print "Model Added"
+		self.model.setPos(0,0,0)
+		print "Model Added Successfully"

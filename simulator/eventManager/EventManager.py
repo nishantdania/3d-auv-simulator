@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	May 28, 2014
+modified on:	June 8, 2014
 
 """
 
@@ -13,8 +13,8 @@ modified on:	May 28, 2014
 from direct.showbase import DirectObject
 
 class EventManager(DirectObject.DirectObject):
-	def __init__(self,pandaScene):
-		self.pandaScene = pandaScene
+	def __init__(self,sceneGraphManager):
+		self.sceneGraphManager = sceneGraphManager
 
 		self.accept('addModel',self.pandaAddModel)
 		self.accept('setX',self.pandaSetX)
@@ -24,12 +24,13 @@ class EventManager(DirectObject.DirectObject):
 		self.accept('setP',self.pandaSetP)
 		self.accept('setR',self.pandaSetR)
 		self.accept('setScale',self.pandaSetScale)
+		self.accept('loadScene',self.pandaLoadScene)
 
 		
 		""" Functions to add model """
 
 	def pandaAddModel(self):
-		self.pandaScene.sceneGraphManager.addModelNode(self.modelName)
+		self.sceneGraphManager.addModelNode(self.modelName)
 
 	def messengerAddModel(self,modelName):
 		self.modelName = modelName
@@ -39,7 +40,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setX """
 
 	def pandaSetX(self):
-		self.pandaScene.sceneGraphManager.setNodeX(self.posX)
+		self.sceneGraphManager.setNodeX(self.posX)
 
 	def messengerSetX(self,posX):
 		self.posX = posX
@@ -48,7 +49,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setY """
 
 	def pandaSetY(self):
-		self.pandaScene.sceneGraphManager.setNodeY(self.posY)
+		self.sceneGraphManager.setNodeY(self.posY)
 
 	def messengerSetY(self,posY):
 		self.posY = posY
@@ -57,7 +58,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setZ """
 
 	def pandaSetZ(self):
-		self.pandaScene.sceneGraphManager.setNodeZ(self.posZ)
+		self.sceneGraphManager.setNodeZ(self.posZ)
 
 	def messengerSetZ(self,posZ):
 		self.posZ = posZ
@@ -66,7 +67,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setH """
 
 	def pandaSetH(self):
-		self.pandaScene.sceneGraphManager.setNodeH(self.posH)
+		self.sceneGraphManager.setNodeH(self.posH)
 
 	def messengerSetH(self,posH):
 		self.posH = posH
@@ -75,7 +76,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setP """
 
 	def pandaSetP(self):
-		self.pandaScene.sceneGraphManager.setNodeP(self.posP)
+		self.sceneGraphManager.setNodeP(self.posP)
 
 	def messengerSetP(self,posP):
 		self.posP = posP
@@ -84,7 +85,7 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setR """
 
 	def pandaSetR(self):
-		self.pandaScene.sceneGraphManager.setNodeR(self.posR)
+		self.sceneGraphManager.setNodeR(self.posR)
 
 	def messengerSetR(self,posR):
 		self.posR = posR
@@ -93,8 +94,17 @@ class EventManager(DirectObject.DirectObject):
 		""" Functions to setScale """
 
 	def pandaSetScale(self):
-		self.pandaScene.sceneGraphManager.setNodeScale(self.scale)
+		self.sceneGraphManager.setNodeScale(self.scale)
 
 	def messengerSetScale(self,scale):
 		self.scale = scale
 		messenger.send('setScale')
+
+		""" Functions to Load Scene """
+
+	def pandaLoadScene(self):
+		self.sceneGraphManager.loadScene(self.filename)
+
+	def messengerLoadScene(self,filename):
+		self.filename = filename
+		messenger.send('loadScene')

@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	May 28, 2014
+modified on:	June 8, 2014
 
 """
 
@@ -28,6 +28,7 @@ class Connections(object):
 		self.connectToSetP()
 		self.connectToSetR()
 		self.connectToSetScale()
+		self.connectToLoadScene()
 
 
 	""" Functions to add model """
@@ -178,4 +179,19 @@ class Connections(object):
 		self.scale = self.qt.getScale()
 		self.queueLock.acquire()
 		self.q.put(self.scale)
+		self.queueLock.release()
+
+	""" Functions to Load Scene """
+
+	def connectToLoadScene(self):
+		self.qt.loadSceneEmit.connect(lambda: self.dataLoadScene(self.qt))
+		self.qt.sendLoadSceneEmit.connect(self.emLoadScene)
+
+	def emLoadScene(self):
+		self.em.messengerLoadScene(self.q.get())
+
+	def dataLoadScene(self,qt):
+		self.filename = self.qt.getSavedFile()
+		self.queueLock.acquire()
+		self.q.put(self.filename)
 		self.queueLock.release()

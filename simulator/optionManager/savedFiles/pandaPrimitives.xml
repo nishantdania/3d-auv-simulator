@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<models><model><filename value="models/panda" /><position x="0.0" y="10.0" z="0.0" /><orientation h="0.0" p="0.0" r="0.0" /><scale value="0.25" /></model><model><filename value="models/teapot" /><position x="3.0" y="10.0" z="0.0" /><orientation h="0.0" p="0.0" r="0.0" /><scale value="0.5" /></model><model><filename value="models/box" /><position x="-3.0" y="10.0" z="0.0" /><orientation h="45.0" p="0.0" r="0.0" /><scale value="1" /></model></models>

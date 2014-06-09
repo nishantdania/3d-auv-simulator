@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	May 28, 2014
+modified on:	June 8, 2014
 
 """
 
@@ -15,7 +15,6 @@ from pandac.PandaModules import WindowProperties
 from pandac.PandaModules import loadPrcFileData
 from panda3d.core import Filename
 from inputManager import KeyboardManager
-from SceneGraphManager import SceneGraphManager
 
 # loadPrcFileData("", "undecorated 1")
 loadPrcFileData("","window-title 3D AUV Simulator")
@@ -31,7 +30,6 @@ class PandaScene(ShowBase):
 		self.mainNode = render.attachNewNode("Main Node")
 		self.initScene()
 		self.pandaKeys = KeyboardManager(self)
-		self.sceneGraphManager = SceneGraphManager(self)
 		
 	def initScene(self):
 		self.model = self.loader.loadModel("models/environment")

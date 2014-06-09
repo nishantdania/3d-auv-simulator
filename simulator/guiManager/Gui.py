@@ -3,7 +3,7 @@
 project:        3d-auv-simulator
 author:         nishant dania
 email:          nishantdania@gmail.com
-modified on:    May 26, 2014
+modified on:    June 8, 2014
 
 """
 
@@ -13,6 +13,7 @@ modified on:    May 26, 2014
 from PyQt4 import QtGui, QtCore
 import sys
 from pandaManager import SceneGraphManager
+from optionManager import SaveScene
 
 class Gui(QtGui.QMainWindow):
 
@@ -48,6 +49,10 @@ class Gui(QtGui.QMainWindow):
     setScaleEmit = QtCore.pyqtSignal()
     sendSetScaleEmit = QtCore.pyqtSignal()
 
+    # loadScene emitter
+    loadSceneEmit = QtCore.pyqtSignal()
+    sendLoadSceneEmit = QtCore.pyqtSignal()
+
     def __init__(self):
         super(Gui, self).__init__()
         self.initUI()
@@ -59,7 +64,7 @@ class Gui(QtGui.QMainWindow):
         self.modelFileLabel = QtGui.QLabel('Model File:')
         self.modelFileEdit = QtGui.QLineEdit()
         self.browseModelFileBtn = QtGui.QPushButton('Browse', self)
-        self.browseModelFileBtn.clicked.connect(self.showDialog)
+        self.browseModelFileBtn.clicked.connect(self.showFileDialog)
         self.browseModelFileBtn.setStatusTip('Open a new model file')
         self.addModelBtn = QtGui.QPushButton('Add Model', self)
         self.addModelBtn.clicked.connect(self.addModelEmitter)
@@ -158,13 +163,27 @@ class Gui(QtGui.QMainWindow):
         browseFile = QtGui.QAction(QtGui.QIcon.fromTheme('open'), '&Browse', self)
         browseFile.setShortcut('Ctrl+B')
         browseFile.setStatusTip('Open new model file')
-        browseFile.triggered.connect(self.showDialog)
+        browseFile.triggered.connect(self.showFileDialog)
+        
+        # Save Action
+        saveAction = QtGui.QAction(QtGui.QIcon.fromTheme('save'), '&Save', self)
+        saveAction.setShortcut('Ctrl+S')
+        saveAction.setStatusTip('Save Scene')
+        saveAction.triggered.connect(self.saveActionTrigger)
+
+        # Load Action
+        loadAction = QtGui.QAction(QtGui.QIcon.fromTheme('open'), '&Load', self)
+        loadAction.setShortcut('Ctrl+L')
+        loadAction.setStatusTip('Load Scene')
+        loadAction.triggered.connect(self.loadSceneEmitter)
         
         self.statusBar().showMessage('Ready')
         
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(browseFile)
+        fileMenu.addAction(saveAction)
+        fileMenu.addAction(loadAction)
         fileMenu.addAction(exitAction)
         
         self.toolbar = self.addToolBar('Exit')
@@ -173,7 +192,7 @@ class Gui(QtGui.QMainWindow):
         self.move(900,0)
 
 
-    def showDialog(self):
+    def showFileDialog(self):
     	self.fname = QtGui.QFileDialog.getOpenFileName(self, 'Open File', '/home')
         self.modelFileEdit.setText(self.fname)
 
@@ -240,3 +259,19 @@ class Gui(QtGui.QMainWindow):
 
     def getScale(self):
         return self.setScaleEdit.text()
+
+        """ Functions to save scene """
+    def saveActionTrigger(self):
+        filename, ok = QtGui.QInputDialog.getText(self, 'Save','Enter filename:')
+        print filename
+        self.saveScene = SaveScene(filename,SceneGraphManager.modelList)
+        self.saveScene.saveModels()
+
+        """ Functions to load scene """
+    def loadSceneEmitter(self):
+        self.filename = QtGui.QFileDialog.getOpenFileName(self, 'Load File', '/home')
+        self.loadSceneEmit.emit()
+        self.sendLoadSceneEmit.emit()
+
+    def getSavedFile(self):
+        return self.filename
