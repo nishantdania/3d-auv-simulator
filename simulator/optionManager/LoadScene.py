@@ -48,7 +48,3 @@ class LoadScene(object):
 				if child_elem.tag == 'scale':
 					scale = child_elem.attrib['value']
 					self.sgm.setNodeScale(scale)
-					
-
-
-		

@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 8, 2014
+modified on:	June 12, 2014
 
 """
 
@@ -68,10 +68,13 @@ class ModelNode(DirectObject):
 		self.scale = scale
 		self.model.setScale(self.scale)
 
-	def addModel(self,modelName):
+	def addModel(self,modelName,modelNumber):
 		self.modelName = str(modelName)
 		self.pandaFile = Filename.fromOsSpecific(self.modelName)
 		self.model = loader.loadModel(self.pandaFile)
 		self.model.reparentTo(self.pandaScene.getMainNode())
 		self.model.setPos(0,0,0)
-		print "Model Added Successfully"
+		self.id = str(modelNumber)
+		self.model.setTag("id",self.id)
+		self.model.setTag("selectable","1")
+		print "Model Added Successfully with id = ",self.model.getTag("id")

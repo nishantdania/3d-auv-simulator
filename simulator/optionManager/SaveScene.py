@@ -13,16 +13,16 @@ from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
 import os
+from utils import Globals
 
 class SaveScene(object):
-	def __init__(self, filename, modelList):
+	def __init__(self, filename):
 		self.filename = os.path.dirname(os.path.realpath(__file__)) + '/savedFiles/' + filename +'.xml'
-		self.modelList = modelList
 
 	def saveModels(self):
 		models = Element('models')
 
-		for modelItem in self.modelList:
+		for modelItem in Globals.modelList:
 			model = SubElement(models, 'model')
 			filename = SubElement(model,'filename',value=modelItem.getFilename())
 			position = SubElement(model,'position',
@@ -40,4 +40,3 @@ class SaveScene(object):
 			xml_declaration=True,encoding='utf-8',
 			method="xml")
 		print "File Saved"
-	

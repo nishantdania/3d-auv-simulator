@@ -12,7 +12,6 @@ modified on:    June 8, 2014
 
 from PyQt4 import QtGui, QtCore
 import sys
-from pandaManager import SceneGraphManager
 from optionManager import SaveScene
 
 class Gui(QtGui.QMainWindow):
@@ -264,7 +263,7 @@ class Gui(QtGui.QMainWindow):
     def saveActionTrigger(self):
         filename, ok = QtGui.QInputDialog.getText(self, 'Save','Enter filename:')
         print filename
-        self.saveScene = SaveScene(filename,SceneGraphManager.modelList)
+        self.saveScene = SaveScene(filename)
         self.saveScene.saveModels()
 
         """ Functions to load scene """

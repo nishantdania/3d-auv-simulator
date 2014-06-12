@@ -1,7 +1,7 @@
-Project Name: 3d-auv-simulator
+project name: 3d-auv-simulator
 author: Nishant Dania
-Email: nishantdania@gmail.com
-Website: nishantdania.github.io
+email: nishantdania@gmail.com
+website: nishantdania.github.io
 
 ******************************
 Pre-requisites:
@@ -39,18 +39,33 @@ To load a previously saved scene:
 1. Click on the GUI to make it active.
 2. Press 'Ctrl + L' or go to file menu and choose the 'Load' option.
 3. Search for the file in the dialog box and click the 'Open' button. 
-4. Sample scenes have been saved in the savedFiles folder. The scenes have been created on Ubuntu 13.04 using Panda3d 1.8.1
 
 ******************************
-Additional options:
-Click on the Panda window.
+Selection Mode:
+To select an object in the scene for modifications, follow the steps below:
+1. Click on the Scene window to make it active and press 1 on the keyboard. This takes you to the selection mode.
+Note: The default camera controls won't work in this mode.
+2. Now click on any object to select it. A green box appears around it suggesting that it has been selected.
+3. Press 1 on the keyboard again to go to the normal mode.
+
+******************************
+Keyboard Operations:
+Esc - Exits the application
+R - resets the scene window to a blanck scene without any objects
+O - Oobe mode toggle
+1 - Selection mode toggle
+
+M - World Map toggle
+The following keyboard operations can be used only when the world map is active:
+Z - Zoom out control for world map
+X - Zoom in control
+C - Default zoom
+W,A,S,D - To move the world map camera
+
+******************************
+Additional Info:
 Press 'o' key to go to 'oobe' mode. This allows to visualize the scene using the mouse freely. Use left mouse button to pan, right mouse button to zoom and both buttons simultaneously to tilt the view.
 Pressing 'o' again takes back to normal view.
-
-Press ESCAPE key to exit the application.
-
-TODO:
-Add a save option to save the current state of the simulator which can be loaded later on.  
 
 **Feel free to drop a mail to nishantdania@gmail.com for any doubts and suggestions.**
 
