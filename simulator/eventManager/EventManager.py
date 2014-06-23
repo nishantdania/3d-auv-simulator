@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 8, 2014
+modified on:	June 23, 2014
 
 """
 
@@ -25,6 +25,9 @@ class EventManager(DirectObject.DirectObject):
 		self.accept('setR',self.pandaSetR)
 		self.accept('setScale',self.pandaSetScale)
 		self.accept('loadScene',self.pandaLoadScene)
+		self.accept('setRelX',self.pandaSetRelX)
+		self.accept('setRelY',self.pandaSetRelY)
+		self.accept('setRelZ',self.pandaSetRelZ)
 
 		
 		""" Functions to add model """
@@ -108,3 +111,30 @@ class EventManager(DirectObject.DirectObject):
 	def messengerLoadScene(self,filename):
 		self.filename = filename
 		messenger.send('loadScene')
+
+		""" Functions to setRelX """
+
+	def pandaSetRelX(self):
+		self.sceneGraphManager.setNodeRelX(self.posRelX)
+
+	def messengerSetRelX(self,posRelX):
+		self.posRelX = posRelX
+		messenger.send('setRelX')
+
+		""" Functions to setRelY """
+
+	def pandaSetRelY(self):
+		self.sceneGraphManager.setNodeRelY(self.posRelY)
+
+	def messengerSetRelY(self,posRelY):
+		self.posRelY = posRelY
+		messenger.send('setRelY')
+
+		""" Functions to setRelZ """
+
+	def pandaSetRelZ(self):
+		self.sceneGraphManager.setNodeRelZ(self.posRelZ)
+
+	def messengerSetRelZ(self,posRelZ):
+		self.posRelZ = posRelZ
+		messenger.send('setRelZ')

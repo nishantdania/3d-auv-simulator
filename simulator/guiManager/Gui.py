@@ -3,7 +3,7 @@
 project:        3d-auv-simulator
 author:         nishant dania
 email:          nishantdania@gmail.com
-modified on:    June 8, 2014
+modified on:    June 23, 2014
 
 """
 
@@ -51,6 +51,18 @@ class Gui(QtGui.QMainWindow):
     # loadScene emitter
     loadSceneEmit = QtCore.pyqtSignal()
     sendLoadSceneEmit = QtCore.pyqtSignal()
+
+    # setRelX emitter
+    setRelXEmit = QtCore.pyqtSignal()
+    sendSetRelXEmit = QtCore.pyqtSignal()
+
+    # setRelY emitter
+    setRelYEmit = QtCore.pyqtSignal()
+    sendSetRelYEmit = QtCore.pyqtSignal()
+
+    # setRelZ emitter
+    setRelZEmit = QtCore.pyqtSignal()
+    sendSetRelZEmit = QtCore.pyqtSignal()
 
     def __init__(self):
         super(Gui, self).__init__()
@@ -112,6 +124,23 @@ class Gui(QtGui.QMainWindow):
         self.setScaleBtn.clicked.connect(self.setScaleEmitter)
         self.setScaleBtn.setStatusTip('Set Scale')
 
+        self.setRelXLabel = QtGui.QLabel('X(rel.):')
+        self.setRelXEdit = QtGui.QLineEdit()
+        self.setRelXBtn = QtGui.QPushButton('Set X(rel.)', self)
+        self.setRelXBtn.clicked.connect(self.setRelXEmitter)
+        self.setRelXBtn.setStatusTip('Set X coordinate relative to selected object')
+
+        self.setRelYLabel = QtGui.QLabel('Y(rel.):')
+        self.setRelYEdit = QtGui.QLineEdit()
+        self.setRelYBtn = QtGui.QPushButton('Set Y(rel.)', self)
+        self.setRelYBtn.clicked.connect(self.setRelYEmitter)
+        self.setRelYBtn.setStatusTip('Set Y coordinate relative to selected object')
+
+        self.setRelZLabel = QtGui.QLabel('Z(rel.):')
+        self.setRelZEdit = QtGui.QLineEdit()
+        self.setRelZBtn = QtGui.QPushButton('Set Z(rel.)', self)
+        self.setRelZBtn.clicked.connect(self.setRelZEmitter)
+        self.setRelZBtn.setStatusTip('Set Z coordinate relative to selected object')
 
         self.cWidget = QtGui.QWidget(self)
         self.grid = QtGui.QGridLayout(self.cWidget)
@@ -148,6 +177,18 @@ class Gui(QtGui.QMainWindow):
         self.grid.addWidget(self.setScaleLabel, 8, 0)
         self.grid.addWidget(self.setScaleEdit, 8, 1)
         self.grid.addWidget(self.setScaleBtn, 8, 2)
+
+        self.grid.addWidget(self.setRelXLabel, 9, 0)
+        self.grid.addWidget(self.setRelXEdit, 9, 1)
+        self.grid.addWidget(self.setRelXBtn, 9, 2)
+
+        self.grid.addWidget(self.setRelYLabel, 10, 0)
+        self.grid.addWidget(self.setRelYEdit, 10, 1)
+        self.grid.addWidget(self.setRelYBtn, 10, 2)
+
+        self.grid.addWidget(self.setRelZLabel, 11, 0)
+        self.grid.addWidget(self.setRelZEdit, 11, 1)
+        self.grid.addWidget(self.setRelZBtn, 11, 2)
 
 
         self.setCentralWidget(self.cWidget)
@@ -274,3 +315,27 @@ class Gui(QtGui.QMainWindow):
 
     def getSavedFile(self):
         return self.filename
+
+        """ Functions to setRelX """
+    def setRelXEmitter(self):
+        self.setRelXEmit.emit()
+        self.sendSetRelXEmit.emit()
+
+    def getRelPosX(self):
+        return self.setRelXEdit.text()
+
+        """ Functions to setRelY """
+    def setRelYEmitter(self):
+        self.setRelYEmit.emit()
+        self.sendSetRelYEmit.emit()
+
+    def getRelPosY(self):
+        return self.setRelYEdit.text()
+
+        """ Functions to setRelZ """
+    def setRelZEmitter(self):
+        self.setRelZEmit.emit()
+        self.sendSetRelZEmit.emit()
+
+    def getRelPosZ(self):
+        return self.setRelZEdit.text()

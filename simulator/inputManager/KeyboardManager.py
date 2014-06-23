@@ -108,6 +108,7 @@ class KeyboardManager(DirectObject.DirectObject):
 					self.previousSelection.reparentTo(self.pandaScene.mainNode)
 				self.currentSelection.reparentTo(self.pandaScene.selectedNode)
 				self.previousSelection = self.currentSelection
+				Globals.prevSelection = Globals.selection
 				Globals.selection = int(self.selectedObjectId)
 
 			if self.worldMapEnabled:
@@ -121,14 +122,19 @@ class KeyboardManager(DirectObject.DirectObject):
 							self.previousSelection.reparentTo(self.pandaScene.mainNode)
 						self.currentSelection.reparentTo(self.pandaScene.selectedNode)
 						self.previousSelection = self.currentSelection
+						Globals.prevSelection = Globals.selection
 						Globals.selection = int(self.selectedObjectId)
 
 	def resetScene(self):
 		Globals.modelList = []
 		Globals.count = -1
 		Globals.selection = -1
+		Globals.PrevSelection = -1
 		self.pandaScene.mainNode.removeNode()
+		self.pandaScene.selectedNode.removeNode()
 		if self.worldMapEnabled:
 			self.pandaScene.hideWorldMap()
 			self.worldMapEnabled = False
 		self.pandaScene.mainNode = render.attachNewNode("Main Node")
+		self.pandaScene.selectedNode = render.attachNewNode("Selected Node")
+		self.pandaScene.selectedNode.showTightBounds()

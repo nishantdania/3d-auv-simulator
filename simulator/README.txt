@@ -49,6 +49,12 @@ Note: The default camera controls won't work in this mode.
 3. Press 1 on the keyboard again to go to the normal mode.
 
 ******************************
+To position an object(say obj1) relative to another object(say obj2):
+1. Select obj1 first by going to the selection mode.
+2. Now select obj2. (Now, obj2 is currently selected and obj1 is the previously selected object)
+3. Enter the required values of X,Y,Z in SetX(rel.),SetY(rel.),SetZ(rel.) respectively. 
+
+******************************
 Keyboard Operations:
 Esc - Exits the application
 R - resets the scene window to a blanck scene without any objects

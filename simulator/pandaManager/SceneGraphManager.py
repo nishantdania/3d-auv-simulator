@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 12, 2014
+modified on:	June 23, 2014
 
 """
 
@@ -57,3 +57,18 @@ class SceneGraphManager(object):
 	def loadScene(self,filename):
 		self.loadFilename = str(filename)
 		loadScene = LoadScene(self.loadFilename,self)
+
+	def setNodeRelX(self,posRelX):
+		self.prevX = Globals.modelList[Globals.prevSelection].getX()
+		self.posRelX = float(self.prevX) + float(posRelX)
+		Globals.modelList[Globals.selection].setX(self.posRelX)
+
+	def setNodeRelY(self,posRelY):
+		self.prevY = Globals.modelList[Globals.prevSelection].getY()
+		self.posRelY = float(self.prevY) + float(posRelY)
+		Globals.modelList[Globals.selection].setY(self.posRelY)
+
+	def setNodeRelZ(self,posRelZ):
+		self.prevZ = Globals.modelList[Globals.prevSelection].getZ()
+		self.posRelZ = float(self.prevZ) + float(posRelZ)
+		Globals.modelList[Globals.selection].setZ(self.posRelZ)

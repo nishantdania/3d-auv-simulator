@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 8, 2014
+modified on:	June 23, 2014
 
 """
 
@@ -29,6 +29,9 @@ class Connections(object):
 		self.connectToSetR()
 		self.connectToSetScale()
 		self.connectToLoadScene()
+		self.connectToSetRelX()
+		self.connectToSetRelY()
+		self.connectToSetRelZ()
 
 
 	""" Functions to add model """
@@ -44,36 +47,6 @@ class Connections(object):
 		self.modelName = self.qt.getModelName()
 		self.queueLock.acquire()
 		self.q.put(self.modelName)
-		self.queueLock.release()
-
-	""" Functions to setX """
-
-	def connectToSetX(self):
-		self.qt.setXEmit.connect(lambda: self.dataSetX(self.qt))
-		self.qt.sendSetXEmit.connect(self.emSetX)
-
-	def emSetX(self):
-		self.em.messengerSetX(self.q.get())
-
-	def dataSetX(self,qt):
-		self.posX = self.qt.getPosX()
-		self.queueLock.acquire()
-		self.q.put(self.posX)
-		self.queueLock.release()
-
-	""" Functions to setX """
-
-	def connectToSetX(self):
-		self.qt.setXEmit.connect(lambda: self.dataSetX(self.qt))
-		self.qt.sendSetXEmit.connect(self.emSetX)
-
-	def emSetX(self):
-		self.em.messengerSetX(self.q.get())
-
-	def dataSetX(self,qt):
-		self.posX = self.qt.getPosX()
-		self.queueLock.acquire()
-		self.q.put(self.posX)
 		self.queueLock.release()
 
 	""" Functions to setX """
@@ -194,4 +167,49 @@ class Connections(object):
 		self.filename = self.qt.getSavedFile()
 		self.queueLock.acquire()
 		self.q.put(self.filename)
+		self.queueLock.release()
+
+	""" Functions to setRelX """
+
+	def connectToSetRelX(self):
+		self.qt.setRelXEmit.connect(lambda: self.dataSetRelX(self.qt))
+		self.qt.sendSetRelXEmit.connect(self.emSetRelX)
+
+	def emSetRelX(self):
+		self.em.messengerSetRelX(self.q.get())
+
+	def dataSetRelX(self,qt):
+		self.posRelX = self.qt.getRelPosX()
+		self.queueLock.acquire()
+		self.q.put(self.posRelX)
+		self.queueLock.release()
+
+	""" Functions to setRelY """
+
+	def connectToSetRelY(self):
+		self.qt.setRelYEmit.connect(lambda: self.dataSetRelY(self.qt))
+		self.qt.sendSetRelYEmit.connect(self.emSetRelY)
+
+	def emSetRelY(self):
+		self.em.messengerSetRelY(self.q.get())
+
+	def dataSetRelY(self,qt):
+		self.posRelY = self.qt.getRelPosY()
+		self.queueLock.acquire()
+		self.q.put(self.posRelY)
+		self.queueLock.release()
+
+	""" Functions to setRelZ """
+
+	def connectToSetRelZ(self):
+		self.qt.setRelZEmit.connect(lambda: self.dataSetRelZ(self.qt))
+		self.qt.sendSetRelZEmit.connect(self.emSetRelZ)
+
+	def emSetRelZ(self):
+		self.em.messengerSetRelZ(self.q.get())
+
+	def dataSetRelZ(self,qt):
+		self.posRelZ = self.qt.getRelPosZ()
+		self.queueLock.acquire()
+		self.q.put(self.posRelZ)
 		self.queueLock.release()
