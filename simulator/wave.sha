@@ -1,0 +1,29 @@
+//Cg
+
+void vshader(
+    uniform float4x4 mat_modelproj,
+    in float4 vtx_position : POSITION,
+    out float4 l_position : POSITION,
+    out float4 l_color : COLOR)
+
+{
+	float4 pos = vtx_position; 
+	pos.z = sin(pos.x)*0.2;
+	float diff = pos.z - vtx_position.z;
+	
+	if(diff < 0 ){
+	diff = diff*-1;
+	}
+
+    l_position = mul(mat_modelproj, vtx_position);
+    diff = 1.0;
+    float4 diffMat = float4(1.0,diff,1.0,1.0);
+    l_color = float4(0.0, 0.7, 0.8, 0.4)*diffMat;
+}
+ 
+void fshader(
+	in float4 l_color : COLOR,
+    out float4 o_color : COLOR)
+{
+    o_color = l_color;
+}

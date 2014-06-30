@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 12, 2014
+modified on:	June 29, 2014
 
 """
 
@@ -15,6 +15,7 @@ from pandac.PandaModules import *
 from pandac.PandaModules import loadPrcFileData
 from panda3d.core import Filename
 from inputManager import KeyboardManager
+from Pool import Pool
 
 # loadPrcFileData("", "undecorated 1")
 loadPrcFileData("","window-title 3D AUV Simulator")
@@ -22,23 +23,34 @@ loadPrcFileData("","window-title 3D AUV Simulator")
 class PandaScene(ShowBase):
 	def __init__(self):
 		ShowBase.__init__(self)
-		base.useDrive()
+		# base.useDrive()
 		# TODO: Mouse Control
 		# base.disableMouse()
 		wp = WindowProperties.getDefault()
 		wp.setOrigin(0,0)
 		base.win.requestProperties(wp)
+		self.waveShader = loader.loadShader("wave.sha")
+		self.UWShader = loader.loadShader("underwater.sha")
+		self.UWMShader = loader.loadShader("UWModel.sha")
 		self.mainNode = render.attachNewNode("Main Node")
 		self.selectedNode = render.attachNewNode("Selected")
 		self.selectedNode.showTightBounds()
+		self.UWNode = render.attachNewNode("Underwater Node")
 		self.initScene()
 		self.pandaKeys = KeyboardManager(self)
+		base.setBackgroundColor(1.0, 1.0, 1.0)
 		
 	def initScene(self):
-		self.model = self.loader.loadModel("models/environment")
-		self.model.reparentTo(self.mainNode)
-		self.model.setScale(0.25,0.25,0.25)
-		self.model.setPos(-8,42,0)
+		self.pool = Pool(self)
+		# plight = PointLight('plight')
+		# plight.setColor(VBase4(0.0, 0.8, 0.8, 1))
+		# plnp = render.attachNewNode(plight)
+		# plnp.setPos(0, 3, 1)
+		# render.setLight(plnp)
+		# self.model = self.loader.loadModel("panda")
+		# self.model.reparentTo(self.mainNode)
+		# # self.model.setScale(0.25,0.25,0.25)
+		# self.model.setPos(-8,42,0)
 		# self.camera.setPosHpr(0,0,2,0,0,0)
 		# base.enableMouse()
 		print "Simulator Initialized"

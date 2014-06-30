@@ -3,7 +3,7 @@
 project:		3d-auv-simulator
 author:			nishant dania
 email: 			nishantdania@gmail.com
-modified on:	June 12, 2014
+modified on:	June 29, 2014
 
 """
 
@@ -73,7 +73,9 @@ class ModelNode(DirectObject):
 		self.pandaFile = Filename.fromOsSpecific(self.modelName)
 		self.model = loader.loadModel(self.pandaFile)
 		self.model.reparentTo(self.pandaScene.getMainNode())
-		self.model.setPos(0,0,0)
+		self.model.setPos(0,0,-20)
+		self.pandaScene.mainNode.setShader(self.pandaScene.UWMShader)
+		self.model.setShaderInput("camPos",base.camera.getX() ,base.camera.getY() ,base.camera.getZ() ,1.0)
 		self.id = str(modelNumber)
 		self.model.setTag("id",self.id)
 		self.model.setTag("selectable","1")

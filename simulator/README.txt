@@ -73,6 +73,6 @@ Additional Info:
 Press 'o' key to go to 'oobe' mode. This allows to visualize the scene using the mouse freely. Use left mouse button to pan, right mouse button to zoom and both buttons simultaneously to tilt the view.
 Pressing 'o' again takes back to normal view.
 
+**A Water pool has been added to simulate underwater scene. Controls to animate the surface would be added in the next commit.
+
 **Feel free to drop a mail to nishantdania@gmail.com for any doubts and suggestions.**
-
-
