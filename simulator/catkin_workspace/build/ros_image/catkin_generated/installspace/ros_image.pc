@@ -1,0 +1,8 @@
+prefix=/home/nishant/gsoc/3d-auv-simulator/catkin_workspace/install
+
+Name: ros_image
+Description: Description of ros_image
+Version: 1.0.0
+Cflags: 
+Libs: -L/home/nishant/gsoc/3d-auv-simulator/catkin_workspace/install/lib 
+Requires: 

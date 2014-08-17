@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/nishant/gsoc/3d-auv-simulator/catkin_workspace/devel/setup.sh

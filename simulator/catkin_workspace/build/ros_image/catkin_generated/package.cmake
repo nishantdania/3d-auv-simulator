@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "ros_image")
+set(ros_image_MAINTAINER "nishant dania <nishantdania@gmail.com>")
+set(ros_image_DEPRECATED "")
+set(ros_image_VERSION "1.0.0")
+set(ros_image_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
+set(ros_image_RUN_DEPENDS "roscpp" "rospy" "std_msgs")
+set(ros_image_BUILDTOOL_DEPENDS "catkin")

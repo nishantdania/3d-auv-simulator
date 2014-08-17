@@ -16,6 +16,7 @@ from pandac.PandaModules import loadPrcFileData
 from panda3d.core import Filename
 from inputManager import KeyboardManager
 from Pool import Pool
+from rosManager import RosManager
 
 # loadPrcFileData("", "undecorated 1")
 loadPrcFileData("","window-title 3D AUV Simulator")
@@ -54,6 +55,7 @@ class PandaScene(ShowBase):
 		# self.camera.setPosHpr(0,0,2,0,0,0)
 		# base.enableMouse()
 		print "Simulator Initialized"
+		RosManager()
 
 	def getMainNode(self):
 		return self.mainNode

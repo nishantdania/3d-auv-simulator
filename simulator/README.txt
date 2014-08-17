@@ -15,6 +15,7 @@ Steps to run the simulator:
 Download the simulator folder. Then in the terminal type the following commands:
 
 # cd simulator
+# source catkin_workspace/devel/setup.bash
 # python main.py
 
 ******************************
