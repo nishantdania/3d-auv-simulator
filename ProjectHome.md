@@ -1,0 +1,1 @@
+The goal is to make a Panda3D based environment builder which can be used to simulate an underwater vehicle. In later stages of the project, ROS would be included in the simulator to directly connect the simulator to actual AUV using ROS.
